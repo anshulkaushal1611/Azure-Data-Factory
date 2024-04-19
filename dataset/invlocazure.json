@@ -1,0 +1,42 @@
+{
+	"name": "invlocazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.invloc.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "loc",
+				"type": "String"
+			},
+			{
+				"name": "loc_label",
+				"type": "String"
+			},
+			{
+				"name": "loctype",
+				"type": "String"
+			},
+			{
+				"name": "loctype_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

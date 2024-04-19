@@ -1,0 +1,42 @@
+{
+	"name": "intostgpossite",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "STG_SITE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_SITE_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_CHNL_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_CHNL_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_SUBCHNL_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_SUBCHNL_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "STG_DIM_POSSITE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

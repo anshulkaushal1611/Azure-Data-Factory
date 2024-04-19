@@ -1,0 +1,80 @@
+{
+	"name": "dataflow3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "intostgtrans",
+						"type": "DatasetReference"
+					},
+					"name": "StgtoFinal"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Stgtofinal",
+						"type": "DatasetReference"
+					},
+					"name": "weeklytable",
+					"rejectedDataLinkedService": {
+						"referenceName": "Challengeinputlinkedservice",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          STGF_POS_SITE_ID as string,",
+				"          STGF_SKU_ID as string,",
+				"          STGF_FSCLDT_ID as string,",
+				"          STGF_PRICE_SUBSTATE_ID as string,",
+				"          STGF_TYPE as string,",
+				"          WEEKLY_SALES_UITS as string,",
+				"          WEEKLY_SALES_DOLLARS as string,",
+				"          WEEKLY_DISCOUNT_DOLLARS as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'select StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type,\\nsum(cast(StgF_sales_units as numeric(32,5))) Weekly_sales_uits ,\\nsum(cast(StgF_sales_dollars as numeric(32,5))) Weekly_sales_dollars,\\nsum(cast(StgF_discount_dollars as numeric(32,5))) weekly_discount_dollars\\nfrom Stg_Fact_trans\\ngroup by StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type',",
+				"     format: 'query') ~> StgtoFinal",
+				"StgtoFinal sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          FINAL_STGF_POS_SITE_ID as string,",
+				"          FINAL_STGF_SKU_ID as string,",
+				"          FINAL_STGF_FSCLDT_ID as string,",
+				"          FINAL_STGF_PRICE_SUBSTATE_ID as string,",
+				"          FINAL_STGF_TYPE as string,",
+				"          WEEKLY_SALES_UITS as string,",
+				"          WEEKLY_SALES_DOLLARS as string,",
+				"          WEEKLY_DISCOUNT_DOLLARS as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_container: 'gyserngyinptfile',",
+				"     mapColumn(",
+				"          FINAL_STGF_POS_SITE_ID = STGF_POS_SITE_ID,",
+				"          FINAL_STGF_SKU_ID = STGF_SKU_ID,",
+				"          FINAL_STGF_FSCLDT_ID = STGF_FSCLDT_ID,",
+				"          FINAL_STGF_PRICE_SUBSTATE_ID = STGF_PRICE_SUBSTATE_ID,",
+				"          FINAL_STGF_TYPE = STGF_TYPE,",
+				"          WEEKLY_SALES_UITS,",
+				"          WEEKLY_SALES_DOLLARS,",
+				"          WEEKLY_DISCOUNT_DOLLARS",
+				"     )) ~> weeklytable"
+			]
+		}
+	}
+}

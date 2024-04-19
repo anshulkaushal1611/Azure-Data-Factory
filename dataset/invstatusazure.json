@@ -1,0 +1,50 @@
+{
+	"name": "invstatusazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.invstatus.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "code_id",
+				"type": "String"
+			},
+			{
+				"name": "code_label",
+				"type": "String"
+			},
+			{
+				"name": "bckt_id",
+				"type": "String"
+			},
+			{
+				"name": "bckt_label",
+				"type": "String"
+			},
+			{
+				"name": "ownrshp_id",
+				"type": "String"
+			},
+			{
+				"name": "ownrshp_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

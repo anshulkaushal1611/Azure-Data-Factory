@@ -1,0 +1,42 @@
+{
+	"name": "SnowflakeTableinvstatus",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "CODE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CODE_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "BCKT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "BCKT_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "OWNRSHP_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "OWNRSHP_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_INVSTATUS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

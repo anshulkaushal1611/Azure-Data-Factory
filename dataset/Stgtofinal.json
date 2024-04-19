@@ -1,0 +1,50 @@
+{
+	"name": "Stgtofinal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "FINAL_STGF_POS_SITE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FINAL_STGF_SKU_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FINAL_STGF_FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FINAL_STGF_PRICE_SUBSTATE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FINAL_STGF_TYPE",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "WEEKLY_SALES_UITS",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "WEEKLY_SALES_DOLLARS",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "WEEKLY_DISCOUNT_DOLLARS",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "MVIEW_WEEKLY_SALES"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

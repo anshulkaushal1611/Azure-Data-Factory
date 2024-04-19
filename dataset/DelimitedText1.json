@@ -1,0 +1,50 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.possite.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "site_id",
+				"type": "String"
+			},
+			{
+				"name": "site_label",
+				"type": "String"
+			},
+			{
+				"name": "subchnl_id",
+				"type": "String"
+			},
+			{
+				"name": "subchnl_label",
+				"type": "String"
+			},
+			{
+				"name": "chnl_id",
+				"type": "String"
+			},
+			{
+				"name": "chnl_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

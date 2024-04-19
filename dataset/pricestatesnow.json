@@ -1,0 +1,34 @@
+{
+	"name": "pricestatesnow",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "STATE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STATE_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SUBSTATE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SUBSTATE_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_PRICESTATE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

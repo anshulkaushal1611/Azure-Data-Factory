@@ -1,0 +1,33 @@
+{
+	"name": "hldyazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.hldy.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "hldy_id",
+				"type": "String"
+			},
+			{
+				"name": "hldy_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,106 @@
+{
+	"name": "SnowflakeTablecldn",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDT_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLWK_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLWK_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLMTH_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLMTH_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLQRTR_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLQRTR_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLYR_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLYR_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SSN_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SSN_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LY_FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LLY_FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDOW",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDOM",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDOQ",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDOY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLWOY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLMOY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLQOY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DATE",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_CLND"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

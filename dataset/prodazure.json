@@ -1,0 +1,86 @@
+{
+	"name": "prodazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.prod.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "sku_id",
+				"type": "String"
+			},
+			{
+				"name": "sku_label",
+				"type": "String"
+			},
+			{
+				"name": "stylclr_id",
+				"type": "String"
+			},
+			{
+				"name": "stylclr_label",
+				"type": "String"
+			},
+			{
+				"name": "styl_id",
+				"type": "String"
+			},
+			{
+				"name": "styl_label",
+				"type": "String"
+			},
+			{
+				"name": "subcat_id",
+				"type": "String"
+			},
+			{
+				"name": "subcat_label",
+				"type": "String"
+			},
+			{
+				"name": "cat_id",
+				"type": "String"
+			},
+			{
+				"name": "cat_label",
+				"type": "String"
+			},
+			{
+				"name": "dept_id",
+				"type": "String"
+			},
+			{
+				"name": "dept_label",
+				"type": "String"
+			},
+			{
+				"name": "issvc",
+				"type": "String"
+			},
+			{
+				"name": "isasmbly",
+				"type": "String"
+			},
+			{
+				"name": "isnfs",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

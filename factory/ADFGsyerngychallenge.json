@@ -1,0 +1,9 @@
+{
+	"name": "ADFGsyerngychallenge",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "877b4002-12e5-416b-9231-44f93dc1ee2a",
+		"tenantId": "816e72e3-7ba8-40c0-abcc-812b242c56c3"
+	}
+}

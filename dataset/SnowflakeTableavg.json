@@ -1,0 +1,34 @@
+{
+	"name": "SnowflakeTableavg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SKU_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "AVERAGE_UNIT_STANDARDCOST",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "AVERAGE_UNIT_LANDEDCOST",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "FACT_AVG"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

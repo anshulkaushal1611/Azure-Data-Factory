@@ -1,0 +1,78 @@
+{
+	"name": "SnowflakeTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "SKU_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SKU_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STYLCLR_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STYLCLR_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STYL_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STYL_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CAT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CAT_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SUBCAT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SUBCAT_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DEPT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DEPT_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ISSVC",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ISASMBLY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ISNFS",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_PROD"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

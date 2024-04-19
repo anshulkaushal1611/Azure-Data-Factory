@@ -1,0 +1,34 @@
+{
+	"name": "SnowflakeTableinvloc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "LOC",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LOC_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LOCTYPE",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LOCTYPE_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_INVLOC"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

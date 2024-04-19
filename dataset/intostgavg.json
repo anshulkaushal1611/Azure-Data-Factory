@@ -1,0 +1,34 @@
+{
+	"name": "intostgavg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "STGF_FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STGF_SKU_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STGF_AVERAGE_UNIT_STANDARDCOST",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STGF_AVERAGE_UNIT_LANDEDCOST",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "STG_FACT_AVG"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

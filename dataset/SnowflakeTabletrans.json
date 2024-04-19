@@ -1,0 +1,70 @@
+{
+	"name": "SnowflakeTabletrans",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "ORDER_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LINE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "TYPE",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DT",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "POS_SITE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SKU_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "FSCLDT_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "PRICE_SUBSTATE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALES_UNITS",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALES_DOLLARS",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DISCOUNT_DOLLARS",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ORIGINAL_ORDER_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ORIGINAL_LINE_ID",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "FACT_TRANS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

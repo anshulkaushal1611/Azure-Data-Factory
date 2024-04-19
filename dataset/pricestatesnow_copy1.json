@@ -1,0 +1,17 @@
+{
+	"name": "pricestatesnow_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_PRICESTATE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

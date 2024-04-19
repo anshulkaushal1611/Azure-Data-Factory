@@ -1,0 +1,42 @@
+{
+	"name": "pricestateazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.pricestate.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "substate_id",
+				"type": "String"
+			},
+			{
+				"name": "substate_label",
+				"type": "String"
+			},
+			{
+				"name": "state_id",
+				"type": "String"
+			},
+			{
+				"name": "state_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

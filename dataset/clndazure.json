@@ -1,0 +1,113 @@
+{
+	"name": "clndazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.clnd.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "fscldt_id",
+				"type": "String"
+			},
+			{
+				"name": "fscldt_label",
+				"type": "String"
+			},
+			{
+				"name": "fsclwk_id",
+				"type": "String"
+			},
+			{
+				"name": "fsclwk_label",
+				"type": "String"
+			},
+			{
+				"name": "fsclmth_id",
+				"type": "String"
+			},
+			{
+				"name": "fsclmth_label",
+				"type": "String"
+			},
+			{
+				"name": "fsclqrtr_id",
+				"type": "String"
+			},
+			{
+				"name": "fsclqrtr_label",
+				"type": "String"
+			},
+			{
+				"name": "fsclyr_id",
+				"type": "String"
+			},
+			{
+				"name": "fsclyr_label",
+				"type": "String"
+			},
+			{
+				"name": "ssn_id",
+				"type": "String"
+			},
+			{
+				"name": "ssn_label",
+				"type": "String"
+			},
+			{
+				"name": "ly_fscldt_id",
+				"type": "String"
+			},
+			{
+				"name": "lly_fscldt_id",
+				"type": "String"
+			},
+			{
+				"name": "fscldow",
+				"type": "String"
+			},
+			{
+				"name": "fscldom",
+				"type": "String"
+			},
+			{
+				"name": "fscldoq",
+				"type": "String"
+			},
+			{
+				"name": "fscldoy",
+				"type": "String"
+			},
+			{
+				"name": "fsclwoy",
+				"type": "String"
+			},
+			{
+				"name": "fsclmoy",
+				"type": "String"
+			},
+			{
+				"name": "fsclqoy",
+				"type": "String"
+			},
+			{
+				"name": "date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

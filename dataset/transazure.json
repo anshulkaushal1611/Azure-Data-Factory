@@ -1,0 +1,78 @@
+{
+	"name": "transazure",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "fact.transactions.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "String"
+			},
+			{
+				"name": "line_id",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "dt",
+				"type": "String"
+			},
+			{
+				"name": "pos_site_id",
+				"type": "String"
+			},
+			{
+				"name": "sku_id",
+				"type": "String"
+			},
+			{
+				"name": "fscldt_id",
+				"type": "String"
+			},
+			{
+				"name": "price_substate_id",
+				"type": "String"
+			},
+			{
+				"name": "sales_units",
+				"type": "String"
+			},
+			{
+				"name": "sales_dollars",
+				"type": "String"
+			},
+			{
+				"name": "discount_dollars",
+				"type": "String"
+			},
+			{
+				"name": "original_order_id",
+				"type": "String"
+			},
+			{
+				"name": "original_line_id",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

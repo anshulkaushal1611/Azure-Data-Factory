@@ -1,0 +1,42 @@
+{
+	"name": "intostgrlloc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "STG_STR",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_STR_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_DSTR",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_DSTR_LABEL",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_RGN",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "STG_RGN_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "STG_DIM_RTLLOC"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "SnowflakeTablehldy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challengesnowflakelinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "HLDY_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "HLDY_LABEL",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM_AND_FACT",
+			"table": "DIM_HLDY"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

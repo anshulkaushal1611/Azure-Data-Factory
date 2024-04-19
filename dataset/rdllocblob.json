@@ -1,0 +1,50 @@
+{
+	"name": "rdllocblob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Challengeinputlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hier.rtlloc.csv",
+				"container": "gyserngyinptfile"
+			},
+			"columnDelimiter": "|",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "str",
+				"type": "String"
+			},
+			{
+				"name": "str_label",
+				"type": "String"
+			},
+			{
+				"name": "dstr",
+				"type": "String"
+			},
+			{
+				"name": "dstr_label",
+				"type": "String"
+			},
+			{
+				"name": "rgn",
+				"type": "String"
+			},
+			{
+				"name": "rgn_label",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
