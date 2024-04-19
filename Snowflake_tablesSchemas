@@ -1,0 +1,320 @@
+Create DATABASE DIM_AND_FACT
+Create SCHEMA Dim_And_fact
+
+DROP Table  Dim_rtlloc
+select * from Dim_rtlloc
+Create Table Dim_rtlloc (
+str varchar(1000),
+str_label varchar(1000),
+dstr varchar(1000),
+dstr_label varchar(1000),
+rgn varchar(1000),
+rgn_label varchar(1000)
+);
+
+SELECT CURRENT_ACCOUNT();
+
+select * from Dim_prod 
+drop table Dim_prod 
+Create Table Dim_prod  (
+sku_id varchar(1000) ,
+sku_label varchar(1000) ,
+stylclr_id varchar(1000) ,
+stylclr_label varchar(1000) ,
+styl_id varchar(1000) ,
+styl_label varchar(1000),
+cat_id varchar(1000) ,
+cat_label varchar(1000) ,
+subcat_id varchar(1000) ,
+subcat_label varchar(1000),
+dept_id varchar(1000) ,
+dept_label varchar(1000),
+issvc varchar(1000) ,
+isasmbly varchar(1000) ,
+isnfs varchar(1000) 
+);
+
+Create Table Dim_pricestate(
+state_id varchar(1000),
+state_label  varchar(1000),
+substate_id varchar(1000),
+substate_label  varchar(1000)
+);
+
+select * from Dim_pricestate
+select * from Dim_possite where site_id is not null
+
+Create Table Dim_possite (
+site_id varchar(1000) primary key,
+site_label varchar(1000) not null,
+chnl_id varchar(1000) not null,
+chnl_label varchar(1000) not null,
+subchnl_id varchar(1000) not null,
+subchnl_label varchar(1000) not null
+);
+
+drop table Dim_invstatus
+Create Table Dim_invstatus(
+code_id varchar(1000) primary key,
+code_label  varchar(1000) not null,
+bckt_id varchar(1000) not null,
+bckt_label  varchar(1000) not null,
+ownrshp_id varchar(1000) not null,
+ownrshp_label  varchar(1000) not null
+);
+
+drop table  Dim_invloc
+Create Table Dim_invloc(
+loc varchar(1000) primary key,
+loc_label  varchar(1000) not null,
+loctype varchar(1000) not null,
+loctype_label  varchar(1000) not null
+);
+
+ drop table Dim_hldy
+create table Dim_hldy(
+hldy_id varchar(1000) primary key,
+hldy_label varchar(1000) not null
+)
+
+create table Dim_clnd(
+fscldt_id varchar(1000) primary key,
+fscldt_label varchar(1000) not null,
+fsclwk_id varchar(1000) not null,
+fsclwk_label varchar(1000) not null,
+fsclmth_id varchar(1000) not null,
+fsclmth_label varchar(1000) not null,
+fsclqrtr_id varchar(1000) not null,
+fsclqrtr_label varchar(1000) not null,
+fsclyr_id varchar(1000) not null,
+fsclyr_label varchar(1000) not null,
+ssn_id varchar(1000) not null,
+ssn_label varchar(1000) not null,
+ly_fscldt_id varchar(1000) not null,
+lly_fscldt_id varchar(1000) not null,
+fscldow varchar(1000) not null,
+fscldom varchar(1000) not null,
+fscldoq varchar(1000) not null,
+fscldoy varchar(1000) not null,
+fsclwoy varchar(1000) not null,
+fsclmoy varchar(1000) not null,
+fsclqoy varchar(1000) not null,
+date varchar(1000) not null
+)
+
+drop table Dim_ord
+create table Dim_ord(
+order_id varchar(1000) primary key,
+line_id varchar(1000) not null,
+type varchar(1000) not null
+)
+
+create table Fact_trans(
+order_id varchar(1000),
+line_id varchar(1000),
+type varchar(1000) ,
+dt varchar(1000)  ,
+pos_site_id varchar(1000),
+sku_id  varchar(1000),
+fscldt_id varchar(1000),
+price_substate_id varchar(1000),
+sales_units varchar(1000),
+sales_dollars varchar(1000),
+discount_dollars varchar(1000),
+original_order_id varchar(1000),
+original_line_id varchar(1000),
+CONSTRAINT PK_Trans PRIMARY key
+(order_id,
+pos_site_id,
+sku_id,
+fscldt_id,
+price_substate_id
+)
+)
+
+create table Fact_AVG(
+fscldt_id varchar(1000) not null,
+sku_id varchar(1000) not null,
+average_unit_standardcost varchar(1000),
+average_unit_landedcost varchar(1000),
+constraint P_avg primary key
+(fscldt_id,
+sku_id
+)
+)
+
+
+
+-----------------------------------------------------Err and Stg--------------------------------------------------------
+
+select * from DIM_RTLLOC where str is not null or dstr is not null or rgn is not null
+
+drop table Stg_Dim_rtlloc
+Create Table Stg_Dim_rtlloc (
+stg_str varchar(1000),
+stg_str_label varchar(1000),
+stg_dstr varchar(1000),
+stg_dstr_label varchar(1000),
+stg_rgn varchar(1000),
+stg_rgn_label varchar(1000)
+);
+select * from Dim_prod where sku_id is not null
+drop table  Stg_Dim_prod 
+Create Table Stg_Dim_prod  (
+stg_sku_id varchar(1000) primary key,
+stg_sku_label varchar(1000) ,
+stg_stylclr_id varchar(1000) ,
+stg_stylclr_label varchar(1000) ,
+stg_styl_id varchar(1000) ,
+stg_styl_label varchar(1000),
+stg_cat_id varchar(1000) ,
+stg_cat_label varchar(1000) ,
+stg_subcat_id varchar(1000) ,
+stg_subcat_label varchar(1000),
+stg_dept_id varchar(1000) ,
+stg_dept_label varchar(1000),
+stg_issvc varchar(1000) ,
+stg_isasmbly varchar(1000) ,
+stg_isnfs varchar(1000) 
+);
+
+select * from Dim_pricestate where state_id is not null
+
+drop table Stg_Dim_pricestate
+Create Table Stg_Dim_pricestate(
+Stg_state_id varchar(1000) primary key,
+Stg_state_label  varchar(1000) not null,
+Stg_substate_id varchar(1000),
+Stg_substate_label  varchar(1000) not null
+);
+
+
+Create Table Stg_Dim_possite (
+Stg_site_id varchar(1000) primary key,
+Stg_site_label varchar(1000) not null,
+Stg_chnl_id varchar(1000) not null,
+Stg_chnl_label varchar(1000) not null,
+Stg_subchnl_id varchar(1000) not null,
+Stg_subchnl_label varchar(1000) not null
+);
+
+select * from DIM_INVSTATUS where code_id is not null
+Create Table Stg_Dim_invstatus(
+Stg_code_id varchar(1000) primary key,
+Stg_code_label  varchar(1000) not null,
+Stg_bckt_id varchar(1000) not null,
+Stg_bckt_label  varchar(1000) not null,
+Stg_ownrshp_id varchar(1000) not null,
+Stg_ownrshp_label  varchar(1000) not null
+);
+
+select * from Dim_invloc where loc is not null
+Create Table Stg_Dim_invloc(
+Stg_loc varchar(1000) primary key,
+Stg_loc_label  varchar(1000) not null,
+Stg_loctype varchar(1000) not null,
+Stg_loctype_label  varchar(1000) not null
+);
+select * from DIM_HLDY where hldy_id is not null
+create table Stg_Dim_hldy(
+Stg_hldy_id varchar(1000) primary key,
+Stg_hldy_label varchar(1000) not null
+)
+
+
+select * from Dim_clnd where fscldt_id is not null
+create table Stg_Dim_clnd(
+Stg_fscldt_id varchar(1000) primary key,
+Stg_fscldt_label varchar(1000) not null,
+Stg_fsclwk_id varchar(1000) not null,
+Stg_fsclwk_label varchar(1000) not null,
+Stg_fsclmth_id varchar(1000) not null,
+Stg_fsclmth_label varchar(1000) not null,
+Stg_fsclqrtr_id varchar(1000) not null,
+Stg_fsclqrtr_label varchar(1000) not null,
+Stg_fsclyr_id varchar(1000) not null,
+Stg_fsclyr_label varchar(1000) not null,
+Stg_ssn_id varchar(1000) not null,
+Stg_ssn_label varchar(1000) not null,
+Stg_ly_fscldt_id varchar(1000) not null,
+Stg_lly_fscldt_id varchar(1000) not null,
+Stg_fscldow varchar(1000) not null,
+Stg_fscldom varchar(1000) not null,
+Stg_fscldoq varchar(1000) not null,
+Stg_fscldoy varchar(1000) not null,
+Stg_fsclwoy varchar(1000) not null,
+Stg_fsclmoy varchar(1000) not null,
+Stg_fsclqoy varchar(1000) not null,
+Stg_date varchar(1000) not null
+)
+
+select count(*) from fact_trans
+select * from fact_trans where 
+order_id is not null or
+line_id is not null or
+type is not null or
+pos_site_id is not null or
+sku_id is not null or
+fscldt_id is not null or
+price_substate_id is not null
+
+select StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type,
+sum(cast(StgF_sales_units as numeric(32,5))) Weekly_sales_uits ,
+sum(cast(StgF_sales_dollars as numeric(32,5))) Weekly_sales_dollars,
+sum(cast(StgF_discount_dollars as numeric(32,5))) weekly_discount_dollars
+from Stg_Fact_trans
+group by StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type
+
+select * from Stg_Fact_trans
+
+create table Stg_Fact_trans(
+StgF_order_id varchar(1000),
+StgF_line_id varchar(1000),
+StgF_type varchar(1000) ,
+StgF_dt varchar(1000)  ,
+StgF_pos_site_id varchar(1000),
+StgF_sku_id  varchar(1000),
+StgF_fscldt_id varchar(1000),
+StgF_price_substate_id varchar(1000),
+StgF_sales_units varchar(1000),
+StgF_sales_dollars varchar(1000),
+StgF_discount_dollars varchar(1000),
+StgF_original_order_id varchar(1000),
+StgF_original_line_id varchar(1000),
+FOREIGN key(StgF_pos_site_id) REFERENCES Stg_Dim_possite(Stg_site_id),
+FOREIGN key(StgF_sku_id) REFERENCES Stg_Dim_prod(stg_sku_id),
+FOREIGN key(StgF_fscldt_id) REFERENCES Stg_Dim_clnd(Stg_fscldt_id)
+)
+
+
+select * from FACT_AVG
+where fscldt_id is not null or sku_id is not null
+
+create table Stg_Fact_AVG(
+StgF_fscldt_id varchar(1000) not null,
+StgF_sku_id varchar(1000) not null,
+StgF_average_unit_standardcost varchar(1000),
+StgF_average_unit_landedcost varchar(1000),
+FOREIGN key(StgF_fscldt_id) REFERENCES Stg_Dim_clnd(Stg_fscldt_id),
+FOREIGN key(StgF_sku_id) REFERENCES Stg_Dim_prod(stg_sku_id)
+)
+
+
+select StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type,
+sum(cast(StgF_sales_units as numeric(32,5))) Weekly_sales_uits ,
+sum(cast(StgF_sales_dollars as numeric(32,5))) Weekly_sales_dollars,
+sum(cast(StgF_discount_dollars as numeric(32,5))) weekly_discount_dollars
+from Stg_Fact_trans
+group by StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type
+
+
+Create table mview_weekly_sales(
+Final_StgF_pos_site_id  varchar(1000),
+Final_StgF_sku_id  varchar(1000),
+Final_StgF_fscldt_id varchar(1000), 
+Final_StgF_price_substate_id varchar(1000), 
+Final_StgF_type varchar(1000),
+Weekly_sales_uits varchar(1000),
+Weekly_sales_dollars varchar(1000),
+ weekly_discount_dollars varchar(1000)
+)
