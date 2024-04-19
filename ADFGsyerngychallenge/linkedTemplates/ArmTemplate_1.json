@@ -1,0 +1,2289 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFGsyerngychallenge"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgpricestate')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_STATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STATE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBSTATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBSTATE_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_PRICESTATE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgprod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SKU_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STYLCLR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STYLCLR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STYL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STYL_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_CAT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_CAT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBCAT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBCAT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_DEPT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_DEPT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_ISSVC",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_ISASMBLY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_ISNFS",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_PROD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgrlloc')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_STR",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_STR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_DSTR",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_DSTR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_RGN",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_RGN_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_RTLLOC"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgstatus')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_CODE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_CODE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_BCKT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_BCKT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_OWNRSHP_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_OWNRSHP_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_INVSTATUS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgtrans')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STGF_ORDER_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_LINE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_TYPE",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_DT",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_POS_SITE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_PRICE_SUBSTATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_SALES_UNITS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_SALES_DOLLARS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_DISCOUNT_DOLLARS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_ORIGINAL_ORDER_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_ORIGINAL_LINE_ID",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_FACT_TRANS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/invlocazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.invloc.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "loc",
+						"type": "String"
+					},
+					{
+						"name": "loc_label",
+						"type": "String"
+					},
+					{
+						"name": "loctype",
+						"type": "String"
+					},
+					{
+						"name": "loctype_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/invstatusazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.invstatus.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "code_id",
+						"type": "String"
+					},
+					{
+						"name": "code_label",
+						"type": "String"
+					},
+					{
+						"name": "bckt_id",
+						"type": "String"
+					},
+					{
+						"name": "bckt_label",
+						"type": "String"
+					},
+					{
+						"name": "ownrshp_id",
+						"type": "String"
+					},
+					{
+						"name": "ownrshp_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pricestateazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.pricestate.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "substate_id",
+						"type": "String"
+					},
+					{
+						"name": "substate_label",
+						"type": "String"
+					},
+					{
+						"name": "state_id",
+						"type": "String"
+					},
+					{
+						"name": "state_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pricestatesnow')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STATE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBSTATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBSTATE_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_PRICESTATE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pricestatesnow_copy1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_PRICESTATE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prodazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.prod.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "sku_id",
+						"type": "String"
+					},
+					{
+						"name": "sku_label",
+						"type": "String"
+					},
+					{
+						"name": "stylclr_id",
+						"type": "String"
+					},
+					{
+						"name": "stylclr_label",
+						"type": "String"
+					},
+					{
+						"name": "styl_id",
+						"type": "String"
+					},
+					{
+						"name": "styl_label",
+						"type": "String"
+					},
+					{
+						"name": "subcat_id",
+						"type": "String"
+					},
+					{
+						"name": "subcat_label",
+						"type": "String"
+					},
+					{
+						"name": "cat_id",
+						"type": "String"
+					},
+					{
+						"name": "cat_label",
+						"type": "String"
+					},
+					{
+						"name": "dept_id",
+						"type": "String"
+					},
+					{
+						"name": "dept_label",
+						"type": "String"
+					},
+					{
+						"name": "issvc",
+						"type": "String"
+					},
+					{
+						"name": "isasmbly",
+						"type": "String"
+					},
+					{
+						"name": "isnfs",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/rdllocblob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.rtlloc.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "str",
+						"type": "String"
+					},
+					{
+						"name": "str_label",
+						"type": "String"
+					},
+					{
+						"name": "dstr",
+						"type": "String"
+					},
+					{
+						"name": "dstr_label",
+						"type": "String"
+					},
+					{
+						"name": "rgn",
+						"type": "String"
+					},
+					{
+						"name": "rgn_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/rdllocsnow')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STR",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DSTR",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DSTR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "RGN",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "RGN_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_RTLLOC"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/transazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "fact.transactions.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "order_id",
+						"type": "String"
+					},
+					{
+						"name": "line_id",
+						"type": "String"
+					},
+					{
+						"name": "type",
+						"type": "String"
+					},
+					{
+						"name": "dt",
+						"type": "String"
+					},
+					{
+						"name": "pos_site_id",
+						"type": "String"
+					},
+					{
+						"name": "sku_id",
+						"type": "String"
+					},
+					{
+						"name": "fscldt_id",
+						"type": "String"
+					},
+					{
+						"name": "price_substate_id",
+						"type": "String"
+					},
+					{
+						"name": "sales_units",
+						"type": "String"
+					},
+					{
+						"name": "sales_dollars",
+						"type": "String"
+					},
+					{
+						"name": "discount_dollars",
+						"type": "String"
+					},
+					{
+						"name": "original_order_id",
+						"type": "String"
+					},
+					{
+						"name": "original_line_id",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow2')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "rdllocsnow",
+								"type": "DatasetReference"
+							},
+							"name": "inrlloc"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTable2",
+								"type": "DatasetReference"
+							},
+							"name": "inprod"
+						},
+						{
+							"dataset": {
+								"referenceName": "pricestatesnow",
+								"type": "DatasetReference"
+							},
+							"name": "inpricestate"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTable1",
+								"type": "DatasetReference"
+							},
+							"name": "inpossite"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableinvstatus",
+								"type": "DatasetReference"
+							},
+							"name": "instatus"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableinvloc",
+								"type": "DatasetReference"
+							},
+							"name": "inivloc"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTablehldy",
+								"type": "DatasetReference"
+							},
+							"name": "Inhldy"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTablecldn",
+								"type": "DatasetReference"
+							},
+							"name": "inclnd"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTabletrans",
+								"type": "DatasetReference"
+							},
+							"name": "intrans"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableavg",
+								"type": "DatasetReference"
+							},
+							"name": "Inavg"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "intostgrlloc",
+								"type": "DatasetReference"
+							},
+							"name": "Stgrlloc"
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgprod",
+								"type": "DatasetReference"
+							},
+							"name": "stgprod"
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgpricestate",
+								"type": "DatasetReference"
+							},
+							"name": "stgpricestate",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgpossite",
+								"type": "DatasetReference"
+							},
+							"name": "stgpossite",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgstatus",
+								"type": "DatasetReference"
+							},
+							"name": "stgstatus",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostginvloc",
+								"type": "DatasetReference"
+							},
+							"name": "Stginvloc",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostghldy",
+								"type": "DatasetReference"
+							},
+							"name": "Stghldy",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgclnd",
+								"type": "DatasetReference"
+							},
+							"name": "Stgclnd",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgtrans",
+								"type": "DatasetReference"
+							},
+							"name": "Stgtrans",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "intostgavg",
+								"type": "DatasetReference"
+							},
+							"name": "stgavg",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          STR as string,",
+						"          STR_LABEL as string,",
+						"          DSTR as string,",
+						"          DSTR_LABEL as string,",
+						"          RGN as string,",
+						"          RGN_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from DIM_RTLLOC where str is not null or dstr is not null or rgn is not null',",
+						"     format: 'query') ~> inrlloc",
+						"source(output(",
+						"          SKU_ID as string,",
+						"          SKU_LABEL as string,",
+						"          STYLCLR_ID as string,",
+						"          STYLCLR_LABEL as string,",
+						"          STYL_ID as string,",
+						"          STYL_LABEL as string,",
+						"          CAT_ID as string,",
+						"          CAT_LABEL as string,",
+						"          SUBCAT_ID as string,",
+						"          SUBCAT_LABEL as string,",
+						"          DEPT_ID as string,",
+						"          DEPT_LABEL as string,",
+						"          ISSVC as string,",
+						"          ISASMBLY as string,",
+						"          ISNFS as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from Dim_prod where sku_id is not null',",
+						"     format: 'query') ~> inprod",
+						"source(output(",
+						"          STATE_ID as string,",
+						"          STATE_LABEL as string,",
+						"          SUBSTATE_ID as string,",
+						"          SUBSTATE_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from Dim_pricestate where state_id is not null',",
+						"     format: 'query') ~> inpricestate",
+						"source(output(",
+						"          SITE_ID as string,",
+						"          SITE_LABEL as string,",
+						"          CHNL_ID as string,",
+						"          CHNL_LABEL as string,",
+						"          SUBCHNL_ID as string,",
+						"          SUBCHNL_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from Dim_possite where site_id is not null',",
+						"     format: 'query') ~> inpossite",
+						"source(output(",
+						"          CODE_ID as string,",
+						"          CODE_LABEL as string,",
+						"          BCKT_ID as string,",
+						"          BCKT_LABEL as string,",
+						"          OWNRSHP_ID as string,",
+						"          OWNRSHP_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from DIM_INVSTATUS where code_id is not null',",
+						"     format: 'query') ~> instatus",
+						"source(output(",
+						"          LOC as string,",
+						"          LOC_LABEL as string,",
+						"          LOCTYPE as string,",
+						"          LOCTYPE_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from Dim_invloc where loc is not null',",
+						"     format: 'query') ~> inivloc",
+						"source(output(",
+						"          HLDY_ID as string,",
+						"          HLDY_LABEL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from DIM_HLDY where hldy_id is not null',",
+						"     format: 'query') ~> Inhldy",
+						"source(output(",
+						"          FSCLDT_ID as string,",
+						"          FSCLDT_LABEL as string,",
+						"          FSCLWK_ID as string,",
+						"          FSCLWK_LABEL as string,",
+						"          FSCLMTH_ID as string,",
+						"          FSCLMTH_LABEL as string,",
+						"          FSCLQRTR_ID as string,",
+						"          FSCLQRTR_LABEL as string,",
+						"          FSCLYR_ID as string,",
+						"          FSCLYR_LABEL as string,",
+						"          SSN_ID as string,",
+						"          SSN_LABEL as string,",
+						"          LY_FSCLDT_ID as string,",
+						"          LLY_FSCLDT_ID as string,",
+						"          FSCLDOW as string,",
+						"          FSCLDOM as string,",
+						"          FSCLDOQ as string,",
+						"          FSCLDOY as string,",
+						"          FSCLWOY as string,",
+						"          FSCLMOY as string,",
+						"          FSCLQOY as string,",
+						"          DATE as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from Dim_clnd where fscldt_id is not null',",
+						"     format: 'query') ~> inclnd",
+						"source(output(",
+						"          ORDER_ID as string,",
+						"          LINE_ID as string,",
+						"          TYPE as string,",
+						"          DT as string,",
+						"          POS_SITE_ID as string,",
+						"          SKU_ID as string,",
+						"          FSCLDT_ID as string,",
+						"          PRICE_SUBSTATE_ID as string,",
+						"          SALES_UNITS as string,",
+						"          SALES_DOLLARS as string,",
+						"          DISCOUNT_DOLLARS as string,",
+						"          ORIGINAL_ORDER_ID as string,",
+						"          ORIGINAL_LINE_ID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from fact_trans where \\norder_id is not null and\\nline_id is not null and\\ntype is not null and\\npos_site_id is not null and\\nsku_id is not null and\\nfscldt_id is not null and\\nprice_substate_id is not null',",
+						"     format: 'query') ~> intrans",
+						"source(output(",
+						"          FSCLDT_ID as string,",
+						"          SKU_ID as string,",
+						"          AVERAGE_UNIT_STANDARDCOST as string,",
+						"          AVERAGE_UNIT_LANDEDCOST as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select * from FACT_AVG\\nwhere fscldt_id is not null or sku_id is not null',",
+						"     format: 'query') ~> Inavg",
+						"inrlloc sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_STR as string,",
+						"          STG_STR_LABEL as string,",
+						"          STG_DSTR as string,",
+						"          STG_DSTR_LABEL as string,",
+						"          STG_RGN as string,",
+						"          STG_RGN_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          STG_STR = STR,",
+						"          STG_STR_LABEL = STR_LABEL,",
+						"          STG_DSTR = DSTR,",
+						"          STG_DSTR_LABEL = DSTR_LABEL,",
+						"          STG_RGN = RGN,",
+						"          STG_RGN_LABEL = RGN_LABEL",
+						"     )) ~> Stgrlloc",
+						"inprod sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_SKU_ID as string,",
+						"          STG_SKU_LABEL as string,",
+						"          STG_STYLCLR_ID as string,",
+						"          STG_STYLCLR_LABEL as string,",
+						"          STG_STYL_ID as string,",
+						"          STG_STYL_LABEL as string,",
+						"          STG_CAT_ID as string,",
+						"          STG_CAT_LABEL as string,",
+						"          STG_SUBCAT_ID as string,",
+						"          STG_SUBCAT_LABEL as string,",
+						"          STG_DEPT_ID as string,",
+						"          STG_DEPT_LABEL as string,",
+						"          STG_ISSVC as string,",
+						"          STG_ISASMBLY as string,",
+						"          STG_ISNFS as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          STG_SKU_ID = SKU_ID,",
+						"          STG_SKU_LABEL = SKU_LABEL,",
+						"          STG_STYLCLR_ID = STYLCLR_ID,",
+						"          STG_STYLCLR_LABEL = STYLCLR_LABEL,",
+						"          STG_STYL_ID = STYL_ID,",
+						"          STG_STYL_LABEL = STYL_LABEL,",
+						"          STG_CAT_ID = CAT_ID,",
+						"          STG_CAT_LABEL = CAT_LABEL,",
+						"          STG_SUBCAT_ID = SUBCAT_ID,",
+						"          STG_SUBCAT_LABEL = SUBCAT_LABEL,",
+						"          STG_DEPT_ID = DEPT_ID,",
+						"          STG_DEPT_LABEL = DEPT_LABEL,",
+						"          STG_ISSVC = ISSVC,",
+						"          STG_ISASMBLY = ISASMBLY,",
+						"          STG_ISNFS = ISNFS",
+						"     )) ~> stgprod",
+						"inpricestate sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_STATE_ID as string,",
+						"          STG_STATE_LABEL as string,",
+						"          STG_SUBSTATE_ID as string,",
+						"          STG_SUBSTATE_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_STATE_ID = STATE_ID,",
+						"          STG_STATE_LABEL = STATE_LABEL,",
+						"          STG_SUBSTATE_ID = SUBSTATE_ID,",
+						"          STG_SUBSTATE_LABEL = SUBSTATE_LABEL",
+						"     )) ~> stgpricestate",
+						"inpossite sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_SITE_ID as string,",
+						"          STG_SITE_LABEL as string,",
+						"          STG_CHNL_ID as string,",
+						"          STG_CHNL_LABEL as string,",
+						"          STG_SUBCHNL_ID as string,",
+						"          STG_SUBCHNL_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_SITE_ID = SITE_ID,",
+						"          STG_SITE_LABEL = SITE_LABEL,",
+						"          STG_CHNL_ID = CHNL_ID,",
+						"          STG_CHNL_LABEL = CHNL_LABEL,",
+						"          STG_SUBCHNL_ID = SUBCHNL_ID,",
+						"          STG_SUBCHNL_LABEL = SUBCHNL_LABEL",
+						"     )) ~> stgpossite",
+						"instatus sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_CODE_ID as string,",
+						"          STG_CODE_LABEL as string,",
+						"          STG_BCKT_ID as string,",
+						"          STG_BCKT_LABEL as string,",
+						"          STG_OWNRSHP_ID as string,",
+						"          STG_OWNRSHP_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_CODE_ID = CODE_ID,",
+						"          STG_CODE_LABEL = CODE_LABEL,",
+						"          STG_BCKT_ID = BCKT_ID,",
+						"          STG_BCKT_LABEL = BCKT_LABEL,",
+						"          STG_OWNRSHP_ID = OWNRSHP_ID,",
+						"          STG_OWNRSHP_LABEL = OWNRSHP_LABEL",
+						"     )) ~> stgstatus",
+						"inivloc sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_LOC as string,",
+						"          STG_LOC_LABEL as string,",
+						"          STG_LOCTYPE as string,",
+						"          STG_LOCTYPE_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_LOC = LOC,",
+						"          STG_LOC_LABEL = LOC_LABEL,",
+						"          STG_LOCTYPE = LOCTYPE,",
+						"          STG_LOCTYPE_LABEL = LOCTYPE_LABEL",
+						"     )) ~> Stginvloc",
+						"Inhldy sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_HLDY_ID as string,",
+						"          STG_HLDY_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_HLDY_ID = HLDY_ID,",
+						"          STG_HLDY_LABEL = HLDY_LABEL",
+						"     )) ~> Stghldy",
+						"inclnd sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STG_FSCLDT_ID as string,",
+						"          STG_FSCLDT_LABEL as string,",
+						"          STG_FSCLWK_ID as string,",
+						"          STG_FSCLWK_LABEL as string,",
+						"          STG_FSCLMTH_ID as string,",
+						"          STG_FSCLMTH_LABEL as string,",
+						"          STG_FSCLQRTR_ID as string,",
+						"          STG_FSCLQRTR_LABEL as string,",
+						"          STG_FSCLYR_ID as string,",
+						"          STG_FSCLYR_LABEL as string,",
+						"          STG_SSN_ID as string,",
+						"          STG_SSN_LABEL as string,",
+						"          STG_LY_FSCLDT_ID as string,",
+						"          STG_LLY_FSCLDT_ID as string,",
+						"          STG_FSCLDOW as string,",
+						"          STG_FSCLDOM as string,",
+						"          STG_FSCLDOQ as string,",
+						"          STG_FSCLDOY as string,",
+						"          STG_FSCLWOY as string,",
+						"          STG_FSCLMOY as string,",
+						"          STG_FSCLQOY as string,",
+						"          STG_DATE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STG_FSCLDT_ID = FSCLDT_ID,",
+						"          STG_FSCLDT_LABEL = FSCLDT_LABEL,",
+						"          STG_FSCLWK_ID = FSCLWK_ID,",
+						"          STG_FSCLWK_LABEL = FSCLWK_LABEL,",
+						"          STG_FSCLMTH_ID = FSCLMTH_ID,",
+						"          STG_FSCLMTH_LABEL = FSCLMTH_LABEL,",
+						"          STG_FSCLQRTR_ID = FSCLQRTR_ID,",
+						"          STG_FSCLQRTR_LABEL = FSCLQRTR_LABEL,",
+						"          STG_FSCLYR_ID = FSCLYR_ID,",
+						"          STG_FSCLYR_LABEL = FSCLYR_LABEL,",
+						"          STG_SSN_ID = SSN_ID,",
+						"          STG_SSN_LABEL = SSN_LABEL,",
+						"          STG_LY_FSCLDT_ID = LY_FSCLDT_ID,",
+						"          STG_LLY_FSCLDT_ID = LLY_FSCLDT_ID,",
+						"          STG_FSCLDOW = FSCLDOW,",
+						"          STG_FSCLDOM = FSCLDOM,",
+						"          STG_FSCLDOQ = FSCLDOQ,",
+						"          STG_FSCLDOY = FSCLDOY,",
+						"          STG_FSCLWOY = FSCLWOY,",
+						"          STG_FSCLMOY = FSCLMOY,",
+						"          STG_FSCLQOY = FSCLQOY,",
+						"          STG_DATE = DATE",
+						"     )) ~> Stgclnd",
+						"intrans sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STGF_ORDER_ID as string,",
+						"          STGF_LINE_ID as string,",
+						"          STGF_TYPE as string,",
+						"          STGF_DT as string,",
+						"          STGF_POS_SITE_ID as string,",
+						"          STGF_SKU_ID as string,",
+						"          STGF_FSCLDT_ID as string,",
+						"          STGF_PRICE_SUBSTATE_ID as string,",
+						"          STGF_SALES_UNITS as string,",
+						"          STGF_SALES_DOLLARS as string,",
+						"          STGF_DISCOUNT_DOLLARS as string,",
+						"          STGF_ORIGINAL_ORDER_ID as string,",
+						"          STGF_ORIGINAL_LINE_ID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STGF_ORDER_ID = ORDER_ID,",
+						"          STGF_LINE_ID = LINE_ID,",
+						"          STGF_TYPE = TYPE,",
+						"          STGF_DT = DT,",
+						"          STGF_POS_SITE_ID = POS_SITE_ID,",
+						"          STGF_SKU_ID = SKU_ID,",
+						"          STGF_FSCLDT_ID = FSCLDT_ID,",
+						"          STGF_PRICE_SUBSTATE_ID = PRICE_SUBSTATE_ID,",
+						"          STGF_SALES_UNITS = SALES_UNITS,",
+						"          STGF_SALES_DOLLARS = SALES_DOLLARS,",
+						"          STGF_DISCOUNT_DOLLARS = DISCOUNT_DOLLARS,",
+						"          STGF_ORIGINAL_ORDER_ID = ORIGINAL_ORDER_ID,",
+						"          STGF_ORIGINAL_LINE_ID = ORIGINAL_LINE_ID",
+						"     )) ~> Stgtrans",
+						"Inavg sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STGF_FSCLDT_ID as string,",
+						"          STGF_SKU_ID as string,",
+						"          STGF_AVERAGE_UNIT_STANDARDCOST as string,",
+						"          STGF_AVERAGE_UNIT_LANDEDCOST as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          STGF_FSCLDT_ID = FSCLDT_ID,",
+						"          STGF_SKU_ID = SKU_ID,",
+						"          STGF_AVERAGE_UNIT_STANDARDCOST = AVERAGE_UNIT_STANDARDCOST,",
+						"          STGF_AVERAGE_UNIT_LANDEDCOST = AVERAGE_UNIT_LANDEDCOST",
+						"     )) ~> stgavg"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/rdllocsnow')]",
+				"[concat(variables('factoryId'), '/datasets/pricestatesnow')]",
+				"[concat(variables('factoryId'), '/datasets/intostgrlloc')]",
+				"[concat(variables('factoryId'), '/datasets/intostgprod')]",
+				"[concat(variables('factoryId'), '/datasets/intostgpricestate')]",
+				"[concat(variables('factoryId'), '/datasets/intostgstatus')]",
+				"[concat(variables('factoryId'), '/datasets/intostgtrans')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "intostgtrans",
+								"type": "DatasetReference"
+							},
+							"name": "StgtoFinal"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Stgtofinal",
+								"type": "DatasetReference"
+							},
+							"name": "weeklytable",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          STGF_POS_SITE_ID as string,",
+						"          STGF_SKU_ID as string,",
+						"          STGF_FSCLDT_ID as string,",
+						"          STGF_PRICE_SUBSTATE_ID as string,",
+						"          STGF_TYPE as string,",
+						"          WEEKLY_SALES_UITS as string,",
+						"          WEEKLY_SALES_DOLLARS as string,",
+						"          WEEKLY_DISCOUNT_DOLLARS as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: 'select StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type,\\nsum(cast(StgF_sales_units as numeric(32,5))) Weekly_sales_uits ,\\nsum(cast(StgF_sales_dollars as numeric(32,5))) Weekly_sales_dollars,\\nsum(cast(StgF_discount_dollars as numeric(32,5))) weekly_discount_dollars\\nfrom Stg_Fact_trans\\ngroup by StgF_pos_site_id,StgF_sku_id ,StgF_fscldt_id, StgF_price_substate_id, StgF_type',",
+						"     format: 'query') ~> StgtoFinal",
+						"StgtoFinal sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          FINAL_STGF_POS_SITE_ID as string,",
+						"          FINAL_STGF_SKU_ID as string,",
+						"          FINAL_STGF_FSCLDT_ID as string,",
+						"          FINAL_STGF_PRICE_SUBSTATE_ID as string,",
+						"          FINAL_STGF_TYPE as string,",
+						"          WEEKLY_SALES_UITS as string,",
+						"          WEEKLY_SALES_DOLLARS as string,",
+						"          WEEKLY_DISCOUNT_DOLLARS as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'gyserngyinptfile',",
+						"     mapColumn(",
+						"          FINAL_STGF_POS_SITE_ID = STGF_POS_SITE_ID,",
+						"          FINAL_STGF_SKU_ID = STGF_SKU_ID,",
+						"          FINAL_STGF_FSCLDT_ID = STGF_FSCLDT_ID,",
+						"          FINAL_STGF_PRICE_SUBSTATE_ID = STGF_PRICE_SUBSTATE_ID,",
+						"          FINAL_STGF_TYPE = STGF_TYPE,",
+						"          WEEKLY_SALES_UITS,",
+						"          WEEKLY_SALES_DOLLARS,",
+						"          WEEKLY_DISCOUNT_DOLLARS",
+						"     )) ~> weeklytable"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/intostgtrans')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/filestotables')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference"
+							},
+							"name": "Possite"
+						},
+						{
+							"dataset": {
+								"referenceName": "rdllocblob",
+								"type": "DatasetReference"
+							},
+							"name": "rdlLoc"
+						},
+						{
+							"dataset": {
+								"referenceName": "prodazure",
+								"type": "DatasetReference"
+							},
+							"name": "prod"
+						},
+						{
+							"dataset": {
+								"referenceName": "pricestateazure",
+								"type": "DatasetReference"
+							},
+							"name": "pricestate"
+						},
+						{
+							"dataset": {
+								"referenceName": "invstatusazure",
+								"type": "DatasetReference"
+							},
+							"name": "instatus"
+						},
+						{
+							"dataset": {
+								"referenceName": "invlocazure",
+								"type": "DatasetReference"
+							},
+							"name": "invloc"
+						},
+						{
+							"dataset": {
+								"referenceName": "hldyazure",
+								"type": "DatasetReference"
+							},
+							"name": "hldyazure"
+						},
+						{
+							"dataset": {
+								"referenceName": "clndazure",
+								"type": "DatasetReference"
+							},
+							"name": "cldn"
+						},
+						{
+							"dataset": {
+								"referenceName": "transazure",
+								"type": "DatasetReference"
+							},
+							"name": "trans"
+						},
+						{
+							"dataset": {
+								"referenceName": "avgazure",
+								"type": "DatasetReference"
+							},
+							"name": "avg"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTable1",
+								"type": "DatasetReference"
+							},
+							"name": "Possitetable",
+							"rejectedDataLinkedService": {
+								"referenceName": "Challengeinputlinkedservice",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "rdllocsnow",
+								"type": "DatasetReference"
+							},
+							"name": "rdlloctable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTable2",
+								"type": "DatasetReference"
+							},
+							"name": "prodtable"
+						},
+						{
+							"dataset": {
+								"referenceName": "pricestatesnow",
+								"type": "DatasetReference"
+							},
+							"name": "pricestatetable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableinvstatus",
+								"type": "DatasetReference"
+							},
+							"name": "invstatustable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableinvloc",
+								"type": "DatasetReference"
+							},
+							"name": "invloctable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTablehldy",
+								"type": "DatasetReference"
+							},
+							"name": "hldytable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTablecldn",
+								"type": "DatasetReference"
+							},
+							"name": "cldntable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTabletrans",
+								"type": "DatasetReference"
+							},
+							"name": "transtable"
+						},
+						{
+							"dataset": {
+								"referenceName": "SnowflakeTableavg",
+								"type": "DatasetReference"
+							},
+							"name": "avgtable"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          site_id as string,",
+						"          site_label as string,",
+						"          subchnl_id as string,",
+						"          subchnl_label as string,",
+						"          chnl_id as string,",
+						"          chnl_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> Possite",
+						"source(output(",
+						"          str as string,",
+						"          str_label as string,",
+						"          dstr as string,",
+						"          dstr_label as string,",
+						"          rgn as string,",
+						"          rgn_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> rdlLoc",
+						"source(output(",
+						"          sku_id as string,",
+						"          sku_label as string,",
+						"          stylclr_id as string,",
+						"          stylclr_label as string,",
+						"          styl_id as string,",
+						"          styl_label as string,",
+						"          subcat_id as string,",
+						"          subcat_label as string,",
+						"          cat_id as string,",
+						"          cat_label as string,",
+						"          dept_id as string,",
+						"          dept_label as string,",
+						"          issvc as string,",
+						"          isasmbly as string,",
+						"          isnfs as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> prod",
+						"source(output(",
+						"          substate_id as string,",
+						"          substate_label as string,",
+						"          state_id as string,",
+						"          state_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> pricestate",
+						"source(output(",
+						"          code_id as string,",
+						"          code_label as string,",
+						"          bckt_id as string,",
+						"          bckt_label as string,",
+						"          ownrshp_id as string,",
+						"          ownrshp_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> instatus",
+						"source(output(",
+						"          loc as string,",
+						"          loc_label as string,",
+						"          loctype as string,",
+						"          loctype_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> invloc",
+						"source(output(",
+						"          hldy_id as string,",
+						"          hldy_label as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> hldyazure",
+						"source(output(",
+						"          fscldt_id as string,",
+						"          fscldt_label as string,",
+						"          fsclwk_id as string,",
+						"          fsclwk_label as string,",
+						"          fsclmth_id as string,",
+						"          fsclmth_label as string,",
+						"          fsclqrtr_id as string,",
+						"          fsclqrtr_label as string,",
+						"          fsclyr_id as string,",
+						"          fsclyr_label as string,",
+						"          ssn_id as string,",
+						"          ssn_label as string,",
+						"          ly_fscldt_id as string,",
+						"          lly_fscldt_id as string,",
+						"          fscldow as string,",
+						"          fscldom as string,",
+						"          fscldoq as string,",
+						"          fscldoy as string,",
+						"          fsclwoy as string,",
+						"          fsclmoy as string,",
+						"          fsclqoy as string,",
+						"          date as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> cldn",
+						"source(output(",
+						"          order_id as string,",
+						"          line_id as string,",
+						"          type as string,",
+						"          dt as string,",
+						"          pos_site_id as string,",
+						"          sku_id as string,",
+						"          fscldt_id as string,",
+						"          price_substate_id as string,",
+						"          sales_units as string,",
+						"          sales_dollars as string,",
+						"          discount_dollars as string,",
+						"          original_order_id as string,",
+						"          original_line_id as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> trans",
+						"source(output(",
+						"          fscldt_id as string,",
+						"          sku_id as string,",
+						"          average_unit_standardcost as string,",
+						"          average_unit_landedcost as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> avg",
+						"Possite sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          SITE_ID as string,",
+						"          SITE_LABEL as string,",
+						"          CHNL_ID as string,",
+						"          CHNL_LABEL as string,",
+						"          SUBCHNL_ID as string,",
+						"          SUBCHNL_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 1,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          SITE_ID = site_id,",
+						"          SITE_LABEL = site_label,",
+						"          CHNL_ID = chnl_id,",
+						"          CHNL_LABEL = chnl_label,",
+						"          SUBCHNL_ID = subchnl_id,",
+						"          SUBCHNL_LABEL = subchnl_label",
+						"     )) ~> Possitetable",
+						"rdlLoc sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STR as string,",
+						"          STR_LABEL as string,",
+						"          DSTR as string,",
+						"          DSTR_LABEL as string,",
+						"          RGN as string,",
+						"          RGN_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 2,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          STR = str,",
+						"          STR_LABEL = str_label,",
+						"          DSTR = dstr,",
+						"          DSTR_LABEL = dstr_label,",
+						"          RGN = rgn,",
+						"          RGN_LABEL = rgn_label",
+						"     )) ~> rdlloctable",
+						"prod sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          SKU_ID as string,",
+						"          SKU_LABEL as string,",
+						"          STYLCLR_ID as string,",
+						"          STYLCLR_LABEL as string,",
+						"          STYL_ID as string,",
+						"          STYL_LABEL as string,",
+						"          CAT_ID as string,",
+						"          CAT_LABEL as string,",
+						"          SUBCAT_ID as string,",
+						"          SUBCAT_LABEL as string,",
+						"          DEPT_ID as string,",
+						"          DEPT_LABEL as string,",
+						"          ISSVC as string,",
+						"          ISASMBLY as string,",
+						"          ISNFS as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 3,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          SKU_ID = sku_id,",
+						"          SKU_LABEL = sku_label,",
+						"          STYLCLR_ID = stylclr_id,",
+						"          STYLCLR_LABEL = stylclr_label,",
+						"          STYL_ID = styl_id,",
+						"          STYL_LABEL = styl_label,",
+						"          CAT_ID = cat_id,",
+						"          CAT_LABEL = cat_label,",
+						"          SUBCAT_ID = subcat_id,",
+						"          SUBCAT_LABEL = subcat_label,",
+						"          DEPT_ID = dept_id,",
+						"          DEPT_LABEL = dept_label,",
+						"          ISSVC = issvc,",
+						"          ISASMBLY = isasmbly,",
+						"          ISNFS = isnfs",
+						"     )) ~> prodtable",
+						"pricestate sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          STATE_ID as string,",
+						"          STATE_LABEL as string,",
+						"          SUBSTATE_ID as string,",
+						"          SUBSTATE_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 4,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          SUBSTATE_ID = substate_id,",
+						"          SUBSTATE_LABEL = substate_label,",
+						"          STATE_ID = state_id,",
+						"          STATE_LABEL = state_label",
+						"     )) ~> pricestatetable",
+						"instatus sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CODE_ID as string,",
+						"          CODE_LABEL as string,",
+						"          BCKT_ID as string,",
+						"          BCKT_LABEL as string,",
+						"          OWNRSHP_ID as string,",
+						"          OWNRSHP_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 5,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          CODE_ID = code_id,",
+						"          CODE_LABEL = code_label,",
+						"          BCKT_ID = bckt_id,",
+						"          BCKT_LABEL = bckt_label,",
+						"          OWNRSHP_ID = ownrshp_id,",
+						"          OWNRSHP_LABEL = ownrshp_label",
+						"     )) ~> invstatustable",
+						"invloc sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          LOC as string,",
+						"          LOC_LABEL as string,",
+						"          LOCTYPE as string,",
+						"          LOCTYPE_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 6,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          LOC = loc,",
+						"          LOC_LABEL = loc_label,",
+						"          LOCTYPE = loctype,",
+						"          LOCTYPE_LABEL = loctype_label",
+						"     )) ~> invloctable",
+						"hldyazure sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          HLDY_ID as string,",
+						"          HLDY_LABEL as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 7,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          HLDY_LABEL = hldy_label,",
+						"          HLDY_ID = hldy_id",
+						"     )) ~> hldytable",
+						"cldn sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          FSCLDT_ID as string,",
+						"          FSCLDT_LABEL as string,",
+						"          FSCLWK_ID as string,",
+						"          FSCLWK_LABEL as string,",
+						"          FSCLMTH_ID as string,",
+						"          FSCLMTH_LABEL as string,",
+						"          FSCLQRTR_ID as string,",
+						"          FSCLQRTR_LABEL as string,",
+						"          FSCLYR_ID as string,",
+						"          FSCLYR_LABEL as string,",
+						"          SSN_ID as string,",
+						"          SSN_LABEL as string,",
+						"          LY_FSCLDT_ID as string,",
+						"          LLY_FSCLDT_ID as string,",
+						"          FSCLDOW as string,",
+						"          FSCLDOM as string,",
+						"          FSCLDOQ as string,",
+						"          FSCLDOY as string,",
+						"          FSCLWOY as string,",
+						"          FSCLMOY as string,",
+						"          FSCLQOY as string,",
+						"          DATE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 8,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          FSCLDT_ID = fscldt_id,",
+						"          FSCLDT_LABEL = fscldt_label,",
+						"          FSCLWK_ID = fsclwk_id,",
+						"          FSCLWK_LABEL = fsclwk_label,",
+						"          FSCLMTH_ID = fsclmth_id,",
+						"          FSCLMTH_LABEL = fsclmth_label,",
+						"          FSCLQRTR_ID = fsclqrtr_id,",
+						"          FSCLQRTR_LABEL = fsclqrtr_label,",
+						"          FSCLYR_ID = fsclyr_id,",
+						"          FSCLYR_LABEL = fsclyr_label,",
+						"          SSN_ID = ssn_id,",
+						"          SSN_LABEL = ssn_label,",
+						"          LY_FSCLDT_ID = ly_fscldt_id,",
+						"          LLY_FSCLDT_ID = lly_fscldt_id,",
+						"          FSCLDOW = fscldow,",
+						"          FSCLDOM = fscldom,",
+						"          FSCLDOQ = fscldoq,",
+						"          FSCLDOY = fscldoy,",
+						"          FSCLWOY = fsclwoy,",
+						"          FSCLMOY = fsclmoy,",
+						"          FSCLQOY = fsclqoy,",
+						"          DATE = date",
+						"     )) ~> cldntable",
+						"trans sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          ORDER_ID as string,",
+						"          LINE_ID as string,",
+						"          TYPE as string,",
+						"          DT as string,",
+						"          POS_SITE_ID as string,",
+						"          SKU_ID as string,",
+						"          FSCLDT_ID as string,",
+						"          PRICE_SUBSTATE_ID as string,",
+						"          SALES_UNITS as string,",
+						"          SALES_DOLLARS as string,",
+						"          DISCOUNT_DOLLARS as string,",
+						"          ORIGINAL_ORDER_ID as string,",
+						"          ORIGINAL_LINE_ID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 9,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          ORDER_ID = order_id,",
+						"          LINE_ID = line_id,",
+						"          TYPE = type,",
+						"          DT = dt,",
+						"          POS_SITE_ID = pos_site_id,",
+						"          SKU_ID = sku_id,",
+						"          FSCLDT_ID = fscldt_id,",
+						"          PRICE_SUBSTATE_ID = price_substate_id,",
+						"          SALES_UNITS = sales_units,",
+						"          SALES_DOLLARS = sales_dollars,",
+						"          DISCOUNT_DOLLARS = discount_dollars,",
+						"          ORIGINAL_ORDER_ID = original_order_id,",
+						"          ORIGINAL_LINE_ID = original_line_id",
+						"     )) ~> transtable",
+						"avg sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          FSCLDT_ID as string,",
+						"          SKU_ID as string,",
+						"          AVERAGE_UNIT_STANDARDCOST as string,",
+						"          AVERAGE_UNIT_LANDEDCOST as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 10,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          FSCLDT_ID = fscldt_id,",
+						"          SKU_ID = sku_id,",
+						"          AVERAGE_UNIT_STANDARDCOST = average_unit_standardcost,",
+						"          AVERAGE_UNIT_LANDEDCOST = average_unit_landedcost",
+						"     )) ~> avgtable"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/rdllocblob')]",
+				"[concat(variables('factoryId'), '/datasets/prodazure')]",
+				"[concat(variables('factoryId'), '/datasets/pricestateazure')]",
+				"[concat(variables('factoryId'), '/datasets/invstatusazure')]",
+				"[concat(variables('factoryId'), '/datasets/invlocazure')]",
+				"[concat(variables('factoryId'), '/datasets/transazure')]",
+				"[concat(variables('factoryId'), '/datasets/rdllocsnow')]",
+				"[concat(variables('factoryId'), '/datasets/pricestatesnow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Getinputfilestosnow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "FiletoIN",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "filestotables",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Possite": {},
+									"rdlLoc": {},
+									"prod": {},
+									"pricestate": {},
+									"instatus": {},
+									"invloc": {},
+									"hldyazure": {},
+									"cldn": {},
+									"trans": {},
+									"avg": {},
+									"Possitetable": {},
+									"rdlloctable": {},
+									"prodtable": {},
+									"pricestatetable": {},
+									"invstatustable": {},
+									"invloctable": {},
+									"hldytable": {},
+									"cldntable": {},
+									"transtable": {},
+									"avgtable": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "INtoStg",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "FiletoIN",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"inrlloc": {},
+									"inprod": {},
+									"inpricestate": {},
+									"inpossite": {},
+									"instatus": {},
+									"inivloc": {},
+									"Inhldy": {},
+									"inclnd": {},
+									"intrans": {},
+									"Inavg": {},
+									"Stgrlloc": {},
+									"stgprod": {},
+									"stgpricestate": {},
+									"stgpossite": {},
+									"stgstatus": {},
+									"Stginvloc": {},
+									"Stghldy": {},
+									"Stgclnd": {},
+									"Stgtrans": {},
+									"stgavg": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Final Table",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "INtoStg",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow3",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"StgtoFinal": {},
+									"weeklytable": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2024-04-19T11:35:52Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/filestotables')]",
+				"[concat(variables('factoryId'), '/dataflows/dataflow2')]",
+				"[concat(variables('factoryId'), '/dataflows/dataflow3')]"
+			]
+		}
+	]
+}

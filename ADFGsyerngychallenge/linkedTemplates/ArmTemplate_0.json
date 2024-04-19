@@ -1,0 +1,1096 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFGsyerngychallenge"
+		},
+		"Challengeinputlinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Challengeinputlinkedservice'"
+		},
+		"challengesnowflakelinkedservice_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'challengesnowflakelinkedservice'"
+		},
+		"challengesnowflakelinkedservice_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "GSYNERGY_CHALLENGE"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Challengeinputlinkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Challengeinputlinkedservice_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/challengesnowflakelinkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "rmnnets-zxb99673",
+					"user": "Anshulkaushal",
+					"database": "[parameters('challengesnowflakelinkedservice_properties_typeProperties_database')]",
+					"warehouse": "GSYERNGY_CHALLENGE",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('challengesnowflakelinkedservice_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.possite.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "site_id",
+						"type": "String"
+					},
+					{
+						"name": "site_label",
+						"type": "String"
+					},
+					{
+						"name": "subchnl_id",
+						"type": "String"
+					},
+					{
+						"name": "subchnl_label",
+						"type": "String"
+					},
+					{
+						"name": "chnl_id",
+						"type": "String"
+					},
+					{
+						"name": "chnl_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Challengeinputlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "SITE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SITE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "CHNL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "CHNL_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBCHNL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBCHNL_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_POSSITE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SKU_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STYLCLR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STYLCLR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STYL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STYL_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "CAT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "CAT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBCAT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SUBCAT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DEPT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DEPT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "ISSVC",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "ISASMBLY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "ISNFS",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_PROD"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTableavg')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "AVERAGE_UNIT_STANDARDCOST",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "AVERAGE_UNIT_LANDEDCOST",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "FACT_AVG"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTablecldn')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLWK_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLWK_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLMTH_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLMTH_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLQRTR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLQRTR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLYR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLYR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SSN_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SSN_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LY_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LLY_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDOW",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDOM",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDOQ",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLWOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLMOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLQOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DATE",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_CLND"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTablehldy')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "HLDY_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "HLDY_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_HLDY"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTableinvloc')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "LOC",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LOC_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LOCTYPE",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LOCTYPE_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_INVLOC"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTableinvstatus')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "CODE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "CODE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "BCKT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "BCKT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "OWNRSHP_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "OWNRSHP_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "DIM_INVSTATUS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTabletrans')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "ORDER_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "LINE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "TYPE",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DT",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "POS_SITE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "PRICE_SUBSTATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SALES_UNITS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "SALES_DOLLARS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "DISCOUNT_DOLLARS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "ORIGINAL_ORDER_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "ORIGINAL_LINE_ID",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "FACT_TRANS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Stgtofinal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "FINAL_STGF_POS_SITE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FINAL_STGF_SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FINAL_STGF_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FINAL_STGF_PRICE_SUBSTATE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "FINAL_STGF_TYPE",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "WEEKLY_SALES_UITS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "WEEKLY_SALES_DOLLARS",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "WEEKLY_DISCOUNT_DOLLARS",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "MVIEW_WEEKLY_SALES"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/avgazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "fact.averagecosts.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "fscldt_id",
+						"type": "String"
+					},
+					{
+						"name": "sku_id",
+						"type": "String"
+					},
+					{
+						"name": "average_unit_standardcost",
+						"type": "String"
+					},
+					{
+						"name": "average_unit_landedcost",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Challengeinputlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/clndazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.clnd.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "fscldt_id",
+						"type": "String"
+					},
+					{
+						"name": "fscldt_label",
+						"type": "String"
+					},
+					{
+						"name": "fsclwk_id",
+						"type": "String"
+					},
+					{
+						"name": "fsclwk_label",
+						"type": "String"
+					},
+					{
+						"name": "fsclmth_id",
+						"type": "String"
+					},
+					{
+						"name": "fsclmth_label",
+						"type": "String"
+					},
+					{
+						"name": "fsclqrtr_id",
+						"type": "String"
+					},
+					{
+						"name": "fsclqrtr_label",
+						"type": "String"
+					},
+					{
+						"name": "fsclyr_id",
+						"type": "String"
+					},
+					{
+						"name": "fsclyr_label",
+						"type": "String"
+					},
+					{
+						"name": "ssn_id",
+						"type": "String"
+					},
+					{
+						"name": "ssn_label",
+						"type": "String"
+					},
+					{
+						"name": "ly_fscldt_id",
+						"type": "String"
+					},
+					{
+						"name": "lly_fscldt_id",
+						"type": "String"
+					},
+					{
+						"name": "fscldow",
+						"type": "String"
+					},
+					{
+						"name": "fscldom",
+						"type": "String"
+					},
+					{
+						"name": "fscldoq",
+						"type": "String"
+					},
+					{
+						"name": "fscldoy",
+						"type": "String"
+					},
+					{
+						"name": "fsclwoy",
+						"type": "String"
+					},
+					{
+						"name": "fsclmoy",
+						"type": "String"
+					},
+					{
+						"name": "fsclqoy",
+						"type": "String"
+					},
+					{
+						"name": "date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Challengeinputlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/hldyazure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Challengeinputlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hier.hldy.csv",
+						"container": "gyserngyinptfile"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "hldy_id",
+						"type": "String"
+					},
+					{
+						"name": "hldy_label",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Challengeinputlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgavg')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STGF_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_SKU_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_AVERAGE_UNIT_STANDARDCOST",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STGF_AVERAGE_UNIT_LANDEDCOST",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_FACT_AVG"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgclnd')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLDT_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLWK_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLWK_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLMTH_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLMTH_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLQRTR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLQRTR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLYR_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLYR_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SSN_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SSN_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_LY_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_LLY_FSCLDT_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLDOW",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLDOM",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLDOQ",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLDOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLWOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLMOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_FSCLQOY",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_DATE",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_CLND"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostghldy')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_HLDY_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_HLDY_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_HLDY"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostginvloc')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_LOC",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_LOC_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_LOCTYPE",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_LOCTYPE_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_INVLOC"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/intostgpossite')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "challengesnowflakelinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "STG_SITE_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SITE_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_CHNL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_CHNL_LABEL",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBCHNL_ID",
+						"type": "VARCHAR"
+					},
+					{
+						"name": "STG_SUBCHNL_LABEL",
+						"type": "VARCHAR"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM_AND_FACT",
+					"table": "STG_DIM_POSSITE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/challengesnowflakelinkedservice')]"
+			]
+		}
+	]
+}
